@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ProjectsContainer from "./components/ProjectsContainer";
+import ProjectsContainerThing from "./components/ProjectsContainer";
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
           </span>
         </div>
 
-        <ProjectsContainer />
+        <ProjectsContainerThing />
 
         <Link href="/weather" className="text-black">
           Wheather App
