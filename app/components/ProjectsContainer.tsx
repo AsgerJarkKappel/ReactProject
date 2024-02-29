@@ -1,10 +1,15 @@
 import React from "react";
 import { projects } from "./projectsData";
-import { getImageUrl } from "../utils/utils";
+import { getImageUrl, getLink } from "../utils/utils";
+import Link from "next/link";
 
 export default function ProjectsContainerThing() {
   const projectsItems = projects.map((item) => (
-    <div className="w-56 bg-white/75 rounded-xl overflow-hidden ease-in-out duration-300 hover:scale-105">
+    <Link
+      href={getLink(item)}
+      key={item.id}
+      className="w-56 bg-gray-400/25 rounded-xl overflow-hidden ease-in-out duration-300 hover:scale-105"
+    >
       <img className="w-full" src={getImageUrl(item)} alt={item.title} />
       <div>
         <h1 className="text-black text-center text-xl font-bold">
@@ -12,7 +17,7 @@ export default function ProjectsContainerThing() {
         </h1>
         <h3 className="text-black text-center">{item.description}</h3>
       </div>
-    </div>
+    </Link>
   ));
 
   return (

@@ -1,0 +1,38 @@
+export default function WeatherApp() {
+  const [city, setCity] = useState("");
+  const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const data = await getData(); 
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
+
+  const fetchWeather = (e: React.SyntheticEvent) => {
+    console.log("shit works");
+    e.preventDefault();
+    axios.get(url).then((response) => {
+      setWeather(response.data);
+      console.log(response.data);
+      console.log(city);
+    });
+    setCity("");
+    setLoading(false);
+  };
+
+  return (
+    <div className="text-black m-10">
+      <form onSubmit={fetchWeather}>
+        <div>
+          <input
+            onChange={(e) => setCity(e.target.value)}
+            type="text"
+            placeholder="Search City"
+          />
+        </div>
+        <button onClick={fetchWeather}>
+          <BsSearch />
+        </button>
+      </form>
+      <p>U fucking did this you cunt</p>
+    </div>
+  );
+}

@@ -6,3 +6,7 @@ export function getImageUrl(item: {
 }) {
   return "/" + item.img + ".svg";
 }
+
+export function getLink(item: any) {
+  return "/" + item.path;
+}
