@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import * as dotenv from "dotenv";
 import axios from "axios";
 import { BsSearch } from "react-icons/bs";
+import CityForm from "./components/form";
+import WeatherData from "./components/weatherData";
 
 interface MainData {
   temp: number;
@@ -20,10 +22,15 @@ interface ApiResponse {
 export default function WeatherApp() {
   const [data, setData] = useState<ApiResponse | null>(null);
 
-  const fetchData = async () => {
+  const handleCitySubmit = (city: string) => {
+    fetchData(city);
+    console.log(`Selected city: ${city}`);
+  };
+
+  const fetchData = async (city: string) => {
     try {
       const response = await axios.get<ApiResponse>(
-        `https://api.openweathermap.org/data/2.5/weather?q=london&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
       );
       setData(response.data);
     } catch (error) {
@@ -33,22 +40,11 @@ export default function WeatherApp() {
   };
 
   return (
-    <div>
+    <div className="text-black">
       <h1>Next.js TypeScript API Example</h1>
+      <CityForm onSubmit={handleCitySubmit} />
 
-      <button onClick={fetchData}>Fetch Data</button>
-
-      {data && (
-        <div className="text-black">
-          <h2>Data from API:</h2>
-          <p>Temperature: {data.main.temp} °C</p>
-          <p>Feels Like: {data.main.feels_like} °C</p>
-          <p>Min Temperature: {data.main.temp_min} °C</p>
-          <p>Max Temperature: {data.main.temp_max} °C</p>
-          <p>Pressure: {data.main.pressure} hPa</p>
-          <p>Humidity: {data.main.humidity}%</p>
-        </div>
-      )}
+      {data && <WeatherData data={data} />}
     </div>
   );
 }
