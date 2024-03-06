@@ -24,7 +24,7 @@ export default function WeatherApp() {
   };
 
   return (
-    <div className="text-black">
+    <div className="text-black ">
       <h1>Next.js TypeScript API Example</h1>
       <CityForm onSubmit={handleCitySubmit} />
 

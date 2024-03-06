@@ -16,13 +16,19 @@ const Forecast: React.FC<WeatherForecastProps> = ({ data }) => {
   }, {} as Record<string, ForecastEntry[]>);
 
   return (
-    <div>
+    <div className="flex flex-col flex-wrap items-center gap-10">
       <h2>Weather Forecast:</h2>
       {Object.entries(groupedByDate).map(([date, entries]) => (
-        <div key={date}>
+        <div
+          key={date}
+          className="flex overflow-x-auto snap-x whitespace-nowrap rounded w-5/6 gap-8 bg-gray-300"
+        >
           <h3>{date}</h3>
           {entries.map((entry) => (
-            <div key={entry.dt_txt}>
+            <div
+              key={entry.dt_txt}
+              className="flex-shrink-0 border-2 bg-white border-purple-200"
+            >
               <p>Date/Time: {entry.dt_txt}</p>
               <p>Temperature: {entry.main.temp} °C</p>
               <p>Feels Like: {entry.main.feels_like} °C</p>
