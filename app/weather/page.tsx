@@ -5,6 +5,7 @@ import axios from "axios";
 import { BsSearch } from "react-icons/bs";
 import CityForm from "./components/form";
 import WeatherData from "./components/weatherData";
+import Backlog from "./components/backlog";
 
 interface MainData {
   temp: number;
@@ -17,6 +18,7 @@ interface MainData {
 
 interface ApiResponse {
   main: MainData;
+  name: string;
 }
 
 export default function WeatherApp() {
@@ -40,11 +42,14 @@ export default function WeatherApp() {
   };
 
   return (
-    <div className="text-black">
-      <h1>Next.js TypeScript API Example</h1>
-      <CityForm onSubmit={handleCitySubmit} />
+    <div className="w-screen h-screen flex justify-center items-center gap-10 flex-wrap">
+      <div className="flex flex-col content-around gap-12 text-black rounded-2xl bg-gradient-to-r from-teal-300 to-yellow-200 p-24">
+        <h1 className="font-bold">Next.js TypeScript API Example</h1>
+        <CityForm onSubmit={handleCitySubmit} />
 
-      {data && <WeatherData data={data} />}
+        {data && <WeatherData data={data} />}
+      </div>
+      <Backlog />
     </div>
   );
 }

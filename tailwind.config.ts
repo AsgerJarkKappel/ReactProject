@@ -13,6 +13,8 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "custom-weather":
+          "background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);",
       },
     },
   },

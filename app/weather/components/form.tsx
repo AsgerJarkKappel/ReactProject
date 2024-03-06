@@ -18,11 +18,12 @@ const CityForm: React.FC<CityFormProps> = ({ onSubmit }) => {
         Enter City:
         <input
           type="text"
+          placeholder="Enter City Name"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit">Search</button>
     </form>
   );
 };
