@@ -1,33 +1,42 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CityForm from "../components/form";
 import Forecast from "./Forecast";
 import * as dotenv from "dotenv";
+import WeatherData from "../components/weatherData";
+import fetchData from "./dataFetch";
 interface ForecastData {
   list: ForecastEntry[];
 }
 
+interface MainData {
+  temp: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  humidity: number;
+}
+
+interface ApiResponse {
+  main: MainData;
+  name: string;
+}
+
 export default function WeatherApp() {
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
+  const [currentData, setCurrentData] = useState<ApiResponse | null>(null);
 
-  const handleCitySubmit = async (city: string) => {
-    try {
-      const response = await axios.get<ForecastData>(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_FORECAST_KEY}`
-      );
-      setForecastData(response.data);
-    } catch (error) {
-      // Handle errors
-      console.error("Error fetching forecast data:", error);
-    }
+  const handleSubmit = async (city: string) => {
+    await fetchData(city, setForecastData, setCurrentData); // Call the function to fetch data
   };
 
   return (
     <div className="text-black ">
       <h1>Next.js TypeScript API Example</h1>
-      <CityForm onSubmit={handleCitySubmit} />
-
+      <CityForm onSubmit={handleSubmit} />
+      {currentData && <WeatherData data={currentData} />}
       {forecastData && <Forecast data={forecastData} />}
     </div>
   );
