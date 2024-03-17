@@ -6,6 +6,7 @@ import { BsSearch } from "react-icons/bs";
 import CityForm from "./components/form";
 import WeatherData from "./components/weatherData";
 import Backlog from "./components/backlog";
+import TodayData from "./forecast/today";
 
 interface MainData {
   temp: number;
@@ -47,7 +48,7 @@ export default function WeatherApp() {
         <h1 className="font-bold">Next.js TypeScript API Example</h1>
         <CityForm onSubmit={handleCitySubmit} />
 
-        {data && <WeatherData data={data} />}
+        {data && <TodayData data={data} />}
       </div>
       <Backlog />
     </div>

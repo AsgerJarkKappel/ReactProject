@@ -6,23 +6,7 @@ import Forecast from "./Forecast";
 import * as dotenv from "dotenv";
 import WeatherData from "../components/weatherData";
 import fetchData from "./dataFetch";
-interface ForecastData {
-  list: ForecastEntry[];
-}
-
-interface MainData {
-  temp: number;
-  feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  humidity: number;
-}
-
-interface ApiResponse {
-  main: MainData;
-  name: string;
-}
+import TodayData from "./today";
 
 export default function WeatherApp() {
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
@@ -33,11 +17,13 @@ export default function WeatherApp() {
   };
 
   return (
-    <div className="text-black ">
-      <h1>Next.js TypeScript API Example</h1>
-      <CityForm onSubmit={handleSubmit} />
-      {currentData && <WeatherData data={currentData} />}
-      {forecastData && <Forecast data={forecastData} />}
+    <div className="w-full overflow-hidden">
+      <div className="text-black flex flex-col items-center mx-auto overflow-hidden max-w-2xl w-full">
+        <h1>Next.js TypeScript API Example</h1>
+        <CityForm onSubmit={handleSubmit} />
+        {currentData && <TodayData data={currentData} />}
+        {forecastData && <Forecast data={forecastData} />}
+      </div>
     </div>
   );
 }

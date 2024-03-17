@@ -1,23 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
 
-interface ForecastData {
-  list: ForecastEntry[];
-}
-
-interface MainData {
-  temp: number;
-  feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  humidity: number;
-}
-
-interface ApiResponse {
-  main: MainData;
-  name: string;
-}
 //Responsible for fetching data only and indirecetly calling the setter functions.
 const fetchData = async (
   city: string,
@@ -34,6 +16,7 @@ const fetchData = async (
 
     setForecastData(responseForecast.data);
     setCurrentData(responseCurrent.data); //.data is to extract the data we want from response
+    console.log(responseCurrent);
   } catch (error) {
     // Handle errors
     console.error("Error fetching forecast data:", error);
