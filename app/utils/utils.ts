@@ -23,8 +23,37 @@ export const formatUnixTimestampToDate = (unixTimestamp: number): string => {
   return date.toDateString();
 };
 
+export const formatdt_text_dateTimestampToDate = (dt_txt: string): string => {
+  const date = new Date(dt_txt);
+  return date.toDateString();
+};
+
+export const dateToHourStamp = (dateString: string): string => {
+  const timeComponents = dateString.split(" ")[1].split(":");
+  const hourStamp = `${timeComponents[0]}:${timeComponents[1]}`;
+  return hourStamp;
+};
+
 export const setWeatherIconSource = (description: string) => {
   const imgElement = document.getElementById("weatherIcon");
+  console.log("This far test");
+
+  if (imgElement) {
+    const fullPath = `https://openweathermap.org/img/wn/${description}@2x.png`;
+    imgElement.setAttribute("src", fullPath);
+    imgElement.style.visibility = "visible";
+    console.log("Should run");
+  } else {
+    console.log("Image not found");
+  }
+};
+
+export const setForecastIconSource = (
+  date: string,
+  dt_txt: string,
+  description: string
+) => {
+  const imgElement = document.getElementById(`forecastIcon_${date}_${dt_txt}`);
   console.log("This far test");
 
   if (imgElement) {
