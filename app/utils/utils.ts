@@ -25,10 +25,13 @@ export const formatUnixTimestampToDate = (unixTimestamp: number): string => {
 
 export const setWeatherIconSource = (description: string) => {
   const imgElement = document.getElementById("weatherIcon");
+  console.log("This far test");
 
   if (imgElement) {
     const fullPath = `https://openweathermap.org/img/wn/${description}@2x.png`;
     imgElement.setAttribute("src", fullPath);
+    imgElement.style.visibility = "visible";
+    console.log("Should run");
   } else {
     console.log("Image not found");
   }

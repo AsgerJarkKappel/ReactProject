@@ -17,8 +17,8 @@ export default function WeatherApp() {
   };
 
   return (
-    <div className="w-full overflow-hidden">
-      <div className="text-black flex flex-col items-center mx-auto overflow-hidden max-w-2xl w-full">
+    <div className="w-full overflow-hidden p-6">
+      <div className="text-black flex flex-col items-center mx-auto overflow-hidden max-w-2xl w-full bg-white rounded-2xl">
         <h1>Next.js TypeScript API Example</h1>
         <CityForm onSubmit={handleSubmit} />
         {currentData && <TodayData data={currentData} />}

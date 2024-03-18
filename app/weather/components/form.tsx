@@ -13,18 +13,25 @@ const CityForm: React.FC<CityFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Enter City:
-        <input
-          type="text"
-          placeholder="Enter City Name"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-      </label>
-      <button type="submit">Search</button>
-    </form>
+    <div className="bg-blue-400 mx-auto w-5/6 rounded-2xl text-white text-center p-2 m-4">
+      <form onSubmit={handleSubmit} className="">
+        <label>
+          <input
+            className="m-2 max-size-full text-black rounded-md pl-2"
+            type="text"
+            placeholder="Enter City Name"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </label>
+        <button
+          className="p-2 bg-blue-300 rounded-2xl hover:bg-blue-200/35 hover:text-black "
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+    </div>
   );
 };
 

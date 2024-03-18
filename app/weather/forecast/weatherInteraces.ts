@@ -15,7 +15,7 @@ interface WeatherDataThing {
 }
 
 interface ApiResponse {
-  weather: { main: string; icon: string }[];
+  weather: { main: string; icon: string; description: string }[];
   main: MainData;
   name: string;
   dt: number;

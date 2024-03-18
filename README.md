@@ -1,3 +1,15 @@
+# TODO
+
+- Date on weather app
+- Prettier icons, but not important
+- search form needs to be a lot prettier
+- Search form with autocomplete and geo button
+
+- 4-day forecast (I dont think 5 will be pretty due to API constraints)
+  Make it pretty (Accordion style)
+
+- Deploy
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
