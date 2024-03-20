@@ -1,6 +1,7 @@
 import {
   dateToHourStamp,
   formatdt_text_dateTimestampToDate,
+  isToday,
   setForecastIconSource,
   setWeatherIconSource,
 } from "@/app/utils/utils";
@@ -14,7 +15,7 @@ const Forecast: React.FC<WeatherForecastProps> = ({ data }) => {
   const groupedByDate = data.list.reduce((acc, entry) => {
     const date = entry.dt_txt.split(" ")[0]; // Extracting date part from dt_txt
     const datestring = formatdt_text_dateTimestampToDate(date);
-    console.log(date);
+    //console.log(date);
     if (!acc[datestring]) {
       acc[datestring] = [];
     }
@@ -31,29 +32,28 @@ const Forecast: React.FC<WeatherForecastProps> = ({ data }) => {
   }, [groupedByDate]);
 
   return (
-    <div className="flex flex-col flex-wrap items-center gap-10 w-full">
-      <h2>Weather Forecast:</h2>
+    <div className="flex flex-col flex-wrap items-center gap-2 w-full">
       {Object.entries(groupedByDate).map(([date, entries]) => (
         <div
           key={date}
-          className="flex overflow-x-auto snap-x whitespace-nowrap rounded w-5/6 gap-8 bg-gray-300"
+          className="flex overflow-x-auto snap-x whitespace-nowrap rounded-xl w-5/6 gap-2 bg-blue-300 items-center p-2 pb-0 border-8 border-solid border-blue-300"
         >
-          <h3>{date}</h3>
+          <h3 className="text-white font-bold">
+            {isToday(date) ? "Today" : date}
+          </h3>
           {entries.map((entry) => (
             <div
               key={entry.dt_txt}
-              className="flex-shrink-0 border-2 bg-white border-purple-200"
+              className="flex-shrink-1 h-36 border-2 bg-white border-purple-200 rounded-2xl text-center p-2"
             >
-              <p>Date/Time: {dateToHourStamp(entry.dt_txt)}</p>
-              <p>Temperature: {entry.main.temp} °C</p>
+              <p>{dateToHourStamp(entry.dt_txt)}</p>
+              <p className="">{entry.main.temp} °C</p>
               <img
                 id={`forecastIcon_${date}_${entry.dt_txt}`}
                 src=""
                 alt="Weather Icon"
               />
-              {entry.rain && (
-                <p>Rain in the Last 3 Hours: {entry.rain["3h"]} mm</p>
-              )}
+              {entry.rain && <p>{entry.rain["3h"]} mm</p>}
               {/* Additional forecast details... */}
             </div>
           ))}

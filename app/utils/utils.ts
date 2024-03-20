@@ -65,3 +65,15 @@ export const setForecastIconSource = (
     console.log("Image not found");
   }
 };
+
+export const isToday = (dateString: string): boolean => {
+  const today = new Date();
+  const formattedDate = formatdt_text_dateTimestampToDate(dateString); // Format the given date string to a standard format
+  const dateToCheck = new Date(formattedDate);
+
+  return (
+    today.getDate() === dateToCheck.getDate() &&
+    today.getMonth() === dateToCheck.getMonth() &&
+    today.getFullYear() === dateToCheck.getFullYear()
+  );
+};
