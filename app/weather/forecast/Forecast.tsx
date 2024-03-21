@@ -1,11 +1,15 @@
 import {
-  dateToHourStamp,
   formatdt_text_dateTimestampToDate,
+  formatUnixTimestampToDate,
+  importantDateCheckMethod,
   isToday,
   setForecastIconSource,
   setWeatherIconSource,
+  unixTimestampToHourStamp,
 } from "@/app/utils/utils";
 import React, { useEffect } from "react";
+import DateLabel from "./DateLabel";
+import TimeLabel from "./TimeLabel";
 
 interface WeatherForecastProps {
   data: ForecastData;
@@ -13,13 +17,11 @@ interface WeatherForecastProps {
 
 const Forecast: React.FC<WeatherForecastProps> = ({ data }) => {
   const groupedByDate = data.list.reduce((acc, entry) => {
-    const date = entry.dt_txt.split(" ")[0]; // Extracting date part from dt_txt
-    const datestring = formatdt_text_dateTimestampToDate(date);
-    //console.log(date);
-    if (!acc[datestring]) {
-      acc[datestring] = [];
+    const dateString = importantDateCheckMethod(entry.dt, data.city.timezone);
+    if (!acc[dateString]) {
+      acc[dateString] = [];
     }
-    acc[datestring].push(entry);
+    acc[dateString].push(entry);
     return acc;
   }, {} as Record<string, ForecastEntry[]>);
 
@@ -36,24 +38,29 @@ const Forecast: React.FC<WeatherForecastProps> = ({ data }) => {
       {Object.entries(groupedByDate).map(([date, entries]) => (
         <div
           key={date}
-          className="flex overflow-x-auto snap-x whitespace-nowrap rounded-xl w-5/6 gap-2 bg-blue-300 items-center p-2 pb-0 border-8 border-solid border-blue-300"
+          className="flex overflow-x overflow-y-hidden snap-x whitespace-nowrap rounded-xl w-5/6 gap-2 bg-blue-300 items-center p-2 pb-0 border-8 border-solid border-blue-300"
+          style={{
+            boxShadow:
+              "-0px -0px 5px rgba(96, 165, 250, 1), 0px 0px 5px rgba(147, 197, 253, 1)",
+          }}
         >
-          <h3 className="text-white font-bold">
-            {isToday(date) ? "Today" : date}
-          </h3>
+          <DateLabel date={date} />
           {entries.map((entry) => (
             <div
               key={entry.dt_txt}
               className="flex-shrink-1 h-36 border-2 bg-white border-purple-200 rounded-2xl text-center p-2"
             >
-              <p>{dateToHourStamp(entry.dt_txt)}</p>
-              <p className="">{entry.main.temp} °C</p>
+              <TimeLabel dt={entry.dt} offset={data.city.timezone} />
+              <p className="">{entry.main.temp.toFixed(1)} °C</p>
               <img
+                style={{ height: "50px", width: "50px" }}
                 id={`forecastIcon_${date}_${entry.dt_txt}`}
                 src=""
                 alt="Weather Icon"
               />
-              {entry.rain && <p>{entry.rain["3h"]} mm</p>}
+              <div className="text-xs">
+                {entry.rain ? <p>{entry.rain["3h"]} mm</p> : <p>Dry</p>}
+              </div>
               {/* Additional forecast details... */}
             </div>
           ))}

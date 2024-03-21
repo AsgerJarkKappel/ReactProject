@@ -28,6 +28,7 @@ interface Rain {
 }
 
 interface ForecastEntry {
+  dt: number;
   main: MainData;
   weather: Weather[];
   clouds: Clouds;
@@ -38,4 +39,5 @@ interface ForecastEntry {
 
 interface ForecastData {
   list: ForecastEntry[];
+  city: { timezone: number };
 }

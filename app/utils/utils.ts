@@ -18,8 +18,11 @@ export function getLink(item: any) {
  * TODO: Use UTC stamp for calculating the date and time, so it isn't sunday in london, when it is saturday
  *
  */
-export const formatUnixTimestampToDate = (unixTimestamp: number): string => {
-  const date = new Date(unixTimestamp * 1000);
+export const formatUnixTimestampToDate = (
+  unixTimestamp: number,
+  timezoneOffset: number
+): string => {
+  const date = new Date((unixTimestamp + timezoneOffset) * 1000);
   return date.toDateString();
 };
 
@@ -28,10 +31,28 @@ export const formatdt_text_dateTimestampToDate = (dt_txt: string): string => {
   return date.toDateString();
 };
 
-export const dateToHourStamp = (dateString: string): string => {
-  const timeComponents = dateString.split(" ")[1].split(":");
-  const hourStamp = `${timeComponents[0]}:${timeComponents[1]}`;
-  return hourStamp;
+export const importantDateCheckMethod = (
+  dt: number,
+  timezoneOffset: number
+): string => {
+  const localUnixTimestamp = dt + timezoneOffset;
+  const localDate = new Date(localUnixTimestamp * 1000);
+  const year: number = localDate.getUTCFullYear();
+  const month = (localDate.getUTCMonth() + 1).toString().padStart(2, "0");
+  const day = localDate.getUTCDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+export const unixTimestampToHourStamp = (
+  unixTimestamp: number,
+  timezoneOffset: number
+): string => {
+  const date = new Date((unixTimestamp + timezoneOffset) * 1000);
+  const hour = date.getUTCHours().toString().padStart(2, "0"); // Get UTC hours
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  const timeLabel = `${hour}:${minutes}`;
+  return timeLabel;
 };
 
 export const setWeatherIconSource = (description: string) => {
@@ -42,7 +63,6 @@ export const setWeatherIconSource = (description: string) => {
     const fullPath = `https://openweathermap.org/img/wn/${description}@2x.png`;
     imgElement.setAttribute("src", fullPath);
     imgElement.style.visibility = "visible";
-    console.log("Should run");
   } else {
     console.log("Image not found");
   }
@@ -60,7 +80,6 @@ export const setForecastIconSource = (
     const fullPath = `https://openweathermap.org/img/wn/${description}@2x.png`;
     imgElement.setAttribute("src", fullPath);
     imgElement.style.visibility = "visible";
-    console.log("Should run");
   } else {
     console.log("Image not found");
   }

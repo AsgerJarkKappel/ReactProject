@@ -1,5 +1,6 @@
 interface ForecastData {
   list: ForecastEntry[];
+  city: { timezone: number };
 }
 
 interface MainData {
@@ -19,4 +20,5 @@ interface ApiResponse {
   main: MainData;
   name: string;
   dt: number;
+  timezone: number;
 }
