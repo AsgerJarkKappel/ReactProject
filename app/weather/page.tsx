@@ -6,21 +6,7 @@ import { BsSearch } from "react-icons/bs";
 import CityForm from "./components/form";
 import WeatherData from "./components/weatherData";
 import Backlog from "./components/backlog";
-import TodayData from "./forecast/today";
-
-interface MainData {
-  temp: number;
-  feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  humidity: number;
-}
-
-interface ApiResponse {
-  main: MainData;
-  name: string;
-}
+import TodayData from "../forecast/today";
 
 export default function WeatherApp() {
   const [data, setData] = useState<ApiResponse | null>(null);

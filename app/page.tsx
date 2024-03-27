@@ -21,10 +21,6 @@ export default function Home() {
         </div>
 
         <ProjectsContainerThing />
-
-        <Link href="./weather" className="text-black">
-          Wheather App
-        </Link>
       </div>
     </main>
   );

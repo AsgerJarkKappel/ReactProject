@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import CityForm from "../components/form";
+import CityForm from "../weather/components/form";
 import Forecast from "./Forecast";
 import * as dotenv from "dotenv";
 import fetchData from "./dataFetch";

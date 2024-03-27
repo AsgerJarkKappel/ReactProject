@@ -19,6 +19,11 @@ const CityForm: React.FC<CityFormProps> = ({ onSubmit }) => {
     }
   };
 
+  /**
+   *
+   * @param latitude fed as props by the geolocation component when that button is pressed
+   * @param longitude
+   */
   const handleLocationSubmit = async (latitude: number, longitude: number) => {
     try {
       const cityData = await fetchCityFromCoordinates(latitude, longitude);

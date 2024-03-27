@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function ProjectsContainerThing() {
   const projectsItems = projects.map((item) => (
     <Link
-      href={getLink(item)}
+      href={item.path}
       key={item.id}
       className="w-56 bg-gray-400/25 rounded-xl overflow-hidden ease-in-out duration-300 hover:scale-105"
     >
