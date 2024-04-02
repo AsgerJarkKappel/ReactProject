@@ -24,12 +24,12 @@ const NavBarTest = () => {
   ));
   return (
     <>
-      <nav className="w-full h-12 bg-white fixed top-0 left-0 z-50">
+      <nav className="w-full h-12 bg-gray-100 fixed top-0 left-0 z-50 border-b-2 border-grey">
         <div className="hidden w-full h-full pr-10 sm:flex flex-row gap-4 justify-end items-center">
           {navItems}
         </div>
         <div className="text-black w-full h-full flex sm:hidden flex-row justify-end items-center">
-          <button id="menuButton" onClick={toggleSidebar}>
+          <button id="menuButton" onClick={toggleSidebar} className="mr-4">
             <FaBars />
           </button>
         </div>

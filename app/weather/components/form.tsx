@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import GeoLocation from "./GeoLocation";
-
+import fetchData from "../../forecast/dataFetch";
 interface CityFormProps {
   onSubmit: (city: string) => void;
 }
 
 const CityForm: React.FC<CityFormProps> = ({ onSubmit }) => {
-  const [city, setCity] = useState("");
   const [manualCityInput, setManualCityInput] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (manualCityInput.trim() !== "") {
-      // Submit manually inputted city
-      setCity(manualCityInput);
+      onSubmit(manualCityInput.trim()); // Trigger form submission with the city obtained from manual input
+      setManualCityInput(""); // Clear the input field
     } else {
       alert("Please enter a city name.");
     }
@@ -28,9 +27,8 @@ const CityForm: React.FC<CityFormProps> = ({ onSubmit }) => {
     try {
       const cityData = await fetchCityFromCoordinates(latitude, longitude);
       const cityName = cityData[0]?.name; // Get the name property from the first object in the array
-      console.log(cityName);
+      //console.log(cityName);
       if (cityName) {
-        setCity(cityName);
         onSubmit(cityName); // Trigger form submission with the city obtained from geolocation
       } else {
         throw new Error("City name not found in the API response.");

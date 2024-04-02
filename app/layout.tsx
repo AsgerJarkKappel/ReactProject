@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/navigation/Navbar";
 import NavBarTest from "./components/navigation/NavBarTest";
-import SideBar from "./components/navigation/SideBar";
-import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="bg-bg-img-1 bg-cover min-h-screen">
+        <div className="bg-grey-100-1 bg-cover min-h-screen">
           <NavBarTest />
           <div className="mt-2">{children}</div>
         </div>
