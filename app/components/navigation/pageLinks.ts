@@ -14,4 +14,9 @@ export const pages = [
     path: "/forecast",
     label: "Forecast App",
   },
+  {
+    rankID: 3,
+    path: "/fitness",
+    label: "Fitness Tracker",
+  },
 ];
